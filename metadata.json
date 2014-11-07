@@ -1,0 +1,14 @@
+{
+  "name": "joshbeard-mco_agent_shell",
+  "version": "0.1.0",
+  "author": "joshbeard",
+  "summary": "Deploys the Puppet Labs Mcollective Shell Agent",
+  "license": "Apache 2.0",
+  "source": "https://github.com/joshbeard/puppet-mco_agent_shell",
+  "project_page": "https://github.com/joshbeard/puppet-mco_agent_shell",
+  "issues_url": "https://github.com/joshbeard/puppet-mco_agent_shell/issues",
+  "dependencies": [
+    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
+  ]
+}
+
