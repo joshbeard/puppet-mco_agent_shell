@@ -50,7 +50,7 @@ This should be available on any node that you want to run commands against.
 To install the Mcollective application:
 
 ```puppet
-include mco_agent_install::application
+include mco_agent_shell::application
 ```
 
 ## Usage
