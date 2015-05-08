@@ -16,7 +16,7 @@
 #
 # === Authors
 #
-# Josh Beard <beard@puppetlabs.com>
+# Josh Beard <josh@signalboxes.net>
 #
 # === Copyright
 #
@@ -27,13 +27,27 @@ class mco_agent_shell::params {
   $ensure = 'present'
   $source = "puppet:///modules/${module_name}"
 
-  ## Allow the user to specify a custom mco_libdir.  Otherwise, default it
-  ## to standard locations for PE and POSS
-  if $is_pe {
-    $mco_libdir = '/opt/puppet/libexec/mcollective/mcollective'
+  case $::kernel {
+    'windows': {
+      unless $::is_pe {
+        fail("${module_name} only supports Puppet Enterprise on Windows")
+      }
+      $mco_libdir = "${::common_appdata}/PuppetLabs/mcollective/etc/plugins/mcollective"
+    }
+    'linux': {
+      ## Allow the user to specify a custom mco_libdir.  Otherwise, default it
+      ## to standard locations for PE and POSS
+      if $::is_pe {
+        $mco_libdir = '/opt/puppet/libexec/mcollective/mcollective'
+      }
+      else {
+        $mco_libdir = '/usr/libexec/mcollective/mcollective/'
+      }
+    }
+    default: {
+      fail("${::kernel} is not supported by ${module_name}")
+    }
   }
-  else {
-    $mco_libdir = '/usr/libexec/mcollective/mcollective/'
-  }
+
 
 }

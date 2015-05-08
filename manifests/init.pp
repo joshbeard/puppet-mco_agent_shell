@@ -56,7 +56,7 @@
 #
 # === Authors
 #
-# Josh Beard <beard@puppetlabs.com>
+# Josh Beard <josh@signalboxes.net>
 #
 # === Copyright
 #
