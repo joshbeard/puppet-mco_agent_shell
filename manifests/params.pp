@@ -32,9 +32,13 @@ class mco_agent_shell::params {
       unless $::is_pe {
         fail("${module_name} only supports Puppet Enterprise on Windows")
       }
+      $owner      = undef
+      $group      = undef
       $mco_libdir = "${::common_appdata}/PuppetLabs/mcollective/etc/plugins/mcollective"
     }
     'linux': {
+      $owner = 'root'
+      $group = '0'
       ## Allow the user to specify a custom mco_libdir.  Otherwise, default it
       ## to standard locations for PE and POSS
       if $::is_pe {
