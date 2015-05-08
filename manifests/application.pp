@@ -94,19 +94,21 @@ class mco_agent_shell::application (
     }
   }
 
+  File {
+    owner => $owner,
+    group => $group,
+    mode  => '0644',
+  }
+
   file { 'mcoapplication_shell_app':
     ensure => $file_ensure,
     path   => "${mco_libdir}/application/shell.rb",
     source => "${source}/application/shell.rb",
-    owner  => $owner,
-    group  => $group,
   }
 
   file { 'mcoapplication_shell_libdir':
     ensure => $dir_ensure,
     path   => "${mco_libdir}/application/shell",
-    owner  => $owner,
-    group  => $group,
     force  => true,
   }
 
@@ -114,16 +116,12 @@ class mco_agent_shell::application (
     ensure => $file_ensure,
     path   => "${mco_libdir}/application/shell/prefix_stream_buf.rb",
     source => "${source}/application/shell/prefix_stream_buf.rb",
-    owner  => $owner,
-    group  => $group,
   }
 
   file { 'mcoapplication_shell_lib_watcher':
     ensure => $file_ensure,
     path   => "${mco_libdir}/application/shell/watcher.rb",
     source => "${source}/application/shell/watcher.rb",
-    owner  => $owner,
-    group  => $group,
   }
 
 }

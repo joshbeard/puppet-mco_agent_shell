@@ -92,27 +92,27 @@ class mco_agent_shell (
     }
   }
 
+  File {
+    owner => $owner,
+    group => $group,
+    mode  => '0644',
+  }
+
   file { 'mcoagent_shell_agent':
     ensure => $file_ensure,
     path   => "${mco_libdir}/agent/shell.rb",
     source => "${source}/agent/shell.rb",
-    owner  => $owner,
-    group  => $group,
   }
 
   file { 'mcoagent_shell_ddl':
     ensure => $file_ensure,
     path   => "${mco_libdir}/agent/shell.ddl",
     source => "${source}/agent/shell.ddl",
-    owner  => $owner,
-    group  => $group,
   }
 
   file { 'mcoagent_shell_libs':
     ensure => $dir_ensure,
     path   => "${mco_libdir}/agent/shell",
-    owner  => $owner,
-    group  => $group,
     force  => true,
   }
 
@@ -120,8 +120,6 @@ class mco_agent_shell (
     ensure => $file_ensure,
     path   => "${mco_libdir}/agent/shell/job.rb",
     source => "${source}/agent/shell/job.rb",
-    owner  => $owner,
-    group  => $group,
   }
 
 }
