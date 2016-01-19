@@ -9,7 +9,7 @@
 # Here you should define a list of variables that this module would require.
 #
 # [*is_pe*]
-#   If this top-scope variable is present, the mco_libdir will be set to the
+#   If this top-scope variable is present, the libdir will be set to the
 #   PE location.  Otherwise, POSS' location for mcollective libraries.
 #
 # === Examples
@@ -34,18 +34,21 @@ class mco_agent_shell::params {
       }
       $owner      = undef
       $group      = undef
-      $mco_libdir = "${::common_appdata}/PuppetLabs/mcollective/etc/plugins/mcollective"
+      $libdir = "${::common_appdata}/PuppetLabs/mcollective/etc/plugins/mcollective"
+      $service    = undef
     }
     'linux': {
       $owner = 'root'
       $group = '0'
-      ## Allow the user to specify a custom mco_libdir.  Otherwise, default it
+      ## Allow the user to specify a custom libdir.  Otherwise, default it
       ## to standard locations for PE and POSS
       if $::is_pe {
-        $mco_libdir = '/opt/puppet/libexec/mcollective/mcollective'
+        $libdir = '/opt/puppet/libexec/mcollective/mcollective'
+        $service    = 'pe-mcollective'
       }
       else {
-        $mco_libdir = '/usr/libexec/mcollective/mcollective/'
+        $libdir = '/usr/libexec/mcollective/mcollective/'
+        $service    = 'mcollective'
       }
     }
     default: {

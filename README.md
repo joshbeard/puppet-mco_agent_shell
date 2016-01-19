@@ -32,9 +32,6 @@ this module should be discontinued for use.
 
 Installs the Agent and, optionally, the Application
 
-__NOTE:__ This does _not_ manage the `pe-mcollective` service.  That service
-must be restarted after deploying the agent that this module provides.
-
 ## Setup
 
 ### Beginning with mco_agent_shell
@@ -47,10 +44,12 @@ include mco_agent_shell
 
 This should be available on any node that you want to run commands against.
 
-To install the Mcollective application:
+To not manage the application:
 
 ```puppet
-include mco_agent_shell::application
+class { 'mco_agent_shell':
+  application => false,
+}
 ```
 
 ## Usage
@@ -71,25 +70,9 @@ class { 'mco_agent_shell':
 }
 ```
 
-You'll need to ensure the `pe-mcollective` module gets restarted when you
-deploy this module.  We are not managing that service here - that's up to you.
-
-You can do something like this:
-
-```puppet
-class { 'mco_agent_shell':
-  ensure => 'present',
-  notify => Service['pe-mcollective'],
-}
-```
-
 ## Reference
 
 Refer to [https://github.com/puppetlabs/mcollective-shell-agent](https://github.com/puppetlabs/mcollective-shell-agent)
 
 ## Limitations
 
-
-## Development
-
-Let's not.
