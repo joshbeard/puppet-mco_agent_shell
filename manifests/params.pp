@@ -29,7 +29,7 @@ class mco_agent_shell::params {
 
   case $::kernel {
     'windows': {
-      unless $::is_pe {
+      unless ($::is_pe or $::aio_agent_version) {
         fail("${module_name} only supports Puppet Enterprise on Windows")
       }
       $owner      = undef
@@ -42,7 +42,7 @@ class mco_agent_shell::params {
       $group = '0'
       ## Allow the user to specify a custom libdir.  Otherwise, default it
       ## to standard locations for PE and POSS
-      if $::is_pe {
+      if ($::is_pe or $::aio_agent_version) {
         $libdir = '/opt/puppet/libexec/mcollective/mcollective'
         $service    = 'pe-mcollective'
       }
