@@ -42,13 +42,17 @@ class mco_agent_shell::params {
       $group = '0'
       ## Allow the user to specify a custom libdir.  Otherwise, default it
       ## to standard locations for PE and POSS
-      if ($::is_pe or $::aio_agent_version) {
-        $libdir = '/opt/puppet/libexec/mcollective/mcollective'
-        $service    = 'pe-mcollective'
+      if ($::aio_agent_version) {
+        $libdir  = '/opt/puppetlabs/mcollective/plugins/mcollective'
+        $service = 'mcollective'
+      }
+      elsif ($::is_pe) {
+        $libdir  = '/opt/puppet/libexec/mcollective/mcollective'
+        $service = 'pe-mcollective'
       }
       else {
-        $libdir = '/usr/libexec/mcollective/mcollective/'
-        $service    = 'mcollective'
+        $libdir  = '/usr/libexec/mcollective/mcollective/'
+        $service = 'mcollective'
       }
     }
     default: {
