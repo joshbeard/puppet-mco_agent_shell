@@ -34,7 +34,14 @@ class mco_agent_shell::params {
       }
       $owner      = undef
       $group      = undef
-      $libdir = "${::common_appdata}/PuppetLabs/mcollective/etc/plugins/mcollective"
+      case $::operatingsystemrelease {
+        /^2012/: {
+          $libdir = "${::common_appdata}/PuppetLabs/mcollective/plugins/mcollective"
+        }
+        default: {
+          $libdir = "${::common_appdata}/PuppetLabs/mcollective/etc/plugins/mcollective"
+        }
+      }
       $service    = undef
     }
     'linux': {
